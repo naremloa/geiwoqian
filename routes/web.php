@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'sdfdsf';
 });
+
+/*
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+*/
+
+Route::get('/welcome','WelcomeController@index');
+Route::post('/identify/login','Identify\LoginController@postlogin');
+//Route::post('/identify/register','Identify\RegisterController@')
+

@@ -93,7 +93,7 @@ return [
     */
 
     'redis' => [
-
+        'cluster'=> false,
         'client' => 'predis',
 
         'default' => [
@@ -102,6 +102,12 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
+
+        'local_cache' => [
+            'host'     => '127.0.0.1',
+            'port'     => 6379,
+            'database' => 0,
+        ]
 
     ],
 
