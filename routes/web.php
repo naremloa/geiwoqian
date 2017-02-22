@@ -11,17 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return 'sdfdsf';
-});
 
-/*
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-*/
-
-Route::get('/welcome','WelcomeController@index');
+Route::get('/','WelcomeController@index');
 Route::post('/identify/login','Identify\LoginController@postlogin');
 //Route::post('/identify/register','Identify\RegisterController@')
 
+Route::group(['middleware' => 'login'], function(){
+
+    Route::get('/home', function(){
+        return '登入成功';
+    });
+});

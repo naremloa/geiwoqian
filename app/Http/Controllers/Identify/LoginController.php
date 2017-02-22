@@ -4,43 +4,44 @@ namespace App\Http\Controllers\Identify;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\UserOperate;
 
 class LoginController extends Controller{
     public function postlogin(){
-//        ÄÃÈ¡µÇÈëÐÅÏ¢
+//        ï¼ˆåˆå§‹åŒ–ï¼‰æ³¨é”€è´¦å·
+        UserOperate::logout();
+
+//        æ‹¿å–ç™»å…¥ä¿¡æ¯
         $account = trim(\Request::input('account'));
         $password = trim(\Request::input('password'));
 
-//        ÑéÖ¤ÐÅÏ¢ÊÇ·ñÎª¿Õ
+//        éªŒè¯ä¿¡æ¯æ˜¯å¦ä¸ºç©º
         if(!$account){
-            //ÇëÌîÐ´ÕËºÅ
+            //è¯·å¡«å†™è´¦å·
         }
         if(!$password){
-            //ÇëÌîÐ´ÃÜÂë
+            //è¯·å¡«å†™å¯†ç 
         }
 
-//        ÑéÖ¤ÐÅÏ¢ÊÇ·ñ·ûºÏ±ê×¼
+//        éªŒè¯ä¿¡æ¯æ˜¯å¦ç¬¦åˆæ ‡å‡†
 
-//        ²éÕÒÕËºÅÊÇ·ñ´æÔÚ
+//        æŸ¥æ‰¾è´¦å·æ˜¯å¦å­˜åœ¨
 
-//        ÑéÖ¤ÕËºÅÃÜÂëÊÇ·ñÆ¥Åä
+//        éªŒè¯è´¦å·å¯†ç æ˜¯å¦åŒ¹é…
         if(1){
-//            ÑéÖ¤ÕËºÅ×´Ì¬ÊÇ·ñÒì³£
+//            éªŒè¯è´¦å·çŠ¶æ€æ˜¯å¦å¼‚å¸¸
 
-//            ´æÈ¡µÇÈëÐÅÏ¢
-            $token = 'aaaaaaaaaaaaaaaa';
-            $expires = 86400000;
-            $token_key = '_token_' . $token;
-            \Redis::connection()->set($token_key, $account);
-            \Redis::connection()->expire($token_key, $expires);
+//            å­˜å–ç™»å…¥ä¿¡æ¯
+            UserOperate::login();//ç¼ºå‚æ•°ï¼Œä»Žæ•°æ®åº“æ‹¿å‡ºçš„å®Œæ•´userä¿¡æ¯
 
-//            $domain = $_SERVER['HTTP_HOST'];
-//            if (strpos($domain, ":") !== false) {
-//                $domain = explode(":", $domain);
-//                $domain = $domain[0];
-//            }
-            //´æcookie
-            setcookie('token', $token, time() + $expires, '/');
+//            $token = 'aaaaaaaaaaaaaaaa';
+//            $expires = 86400000;
+//            $token_key = '_token_' . $token;
+//            \Redis::connection()->set($token_key, $account);
+//            \Redis::connection()->expire($token_key, $expires);
+
+            //å­˜cookie
+//            setcookie('token', $token, time() + $expires, '/');
             return 200;
         }
     }
