@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Identify;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\UserOperate;
+use App\Libraries\Response;
 
 class LoginController extends Controller{
     public function postlogin(){
@@ -18,31 +20,28 @@ class LoginController extends Controller{
 //        验证信息是否为空
         if(!$account){
             //请填写账号
+            return Response::formatJson(400,'账号不能为空');
         }
         if(!$password){
             //请填写密码
+            return Response::formatJson(400,'密码不能为空');
         }
 
 //        验证信息是否符合标准
 
 //        查找账号是否存在
+        $model = User::findByAccount($account);
+        if($model){
+//            验证账号密码是否匹配
+            if(User::checkPassword($model, $password)){
+//                验证账号状态是否异常
 
-//        验证账号密码是否匹配
-        if(1){
-//            验证账号状态是否异常
-
-//            存取登入信息
-            UserOperate::login();//缺参数，从数据库拿出的完整user信息
-
-//            $token = 'aaaaaaaaaaaaaaaa';
-//            $expires = 86400000;
-//            $token_key = '_token_' . $token;
-//            \Redis::connection()->set($token_key, $account);
-//            \Redis::connection()->expire($token_key, $expires);
-
-            //存cookie
-//            setcookie('token', $token, time() + $expires, '/');
-            return 200;
+//                存取登入信息
+                $auth_token = UserOperate::login($model->toArray());
+                $redirect = '/';
+                return Response::formatJson(200,'登入成功',['auto_token' => $auth_token, 'redirect' => $redirect]);
+            }
         }
+        return Response::formatJson(404, '邮箱或密码错误');
     }
 }

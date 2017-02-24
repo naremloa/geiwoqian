@@ -12,8 +12,16 @@ class User extends Model
 
     public $timestamps = false;
 
-    public static function findByEmail($account) {
+    public static function findByAccount($account) {
         return User::where("name", '=', $account)->first();
+    }
+
+    public static function checkPassword(User $model, $password){
+        if($model->password == UserOperate::encryptPassword($password, $model->create_time)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

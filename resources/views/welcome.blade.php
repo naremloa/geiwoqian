@@ -44,7 +44,9 @@
             var account = $('#account').val();
             var password = $('#password').val();
             $.post('/identify/login',{account: account,password: password},function(data){
-                console.log(data);
+                if(data.ec != 200){
+                    alertify
+                }
 //                window.location.href = '/';
 //                window.location.reload();
 //                if(data.ec == 200){

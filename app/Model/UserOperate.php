@@ -65,7 +65,7 @@ class UserOperate extends Model
 //            }
 //            setcookie('token', $token, time() + $expires, '/', '.'.$domain, true);
         //存cookie
-        setcookie(LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
+        setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
     }
 
     public static function encryptPassword($password, $time) {
