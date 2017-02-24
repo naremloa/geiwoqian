@@ -67,4 +67,10 @@ class UserOperate extends Model
         //存cookie
         setcookie(LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
     }
+
+    public static function encryptPassword($password, $time) {
+        $fake_salt = mb_substr($password, 0, 2, 'utf8') . substr($time, 3) . strlen($time);
+
+        return md5($password . $time . $fake_salt);
+    }
 }

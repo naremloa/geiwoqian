@@ -1,6 +1,6 @@
 @extends('main')
 @section('title')
-    欢迎页
+    注册页
 @endsection
 @section('link')
 @endsection
@@ -24,9 +24,9 @@
 @endsection
 @section('content')
     <div class="title">
-        这里是欢迎页面
+        这里是注册页
     </div>
-    <div class="login-box">
+    <div class="register-box">
         <div>
             <label for="account">账号：</label>
             <input id="account">
@@ -35,27 +35,16 @@
             <label for="password">密码：</label>
             <input id="password" type="password">
         </div>
-        <div class="login-btn btn" style="margin-top: 20px;">登入</div>
+        <div class="register-btn btn" style="margin-top: 20px;">注册</div>
     </div>
-    <a href="/register">跳到注册页</a>
+    <a href="/">跳到登入页</a>
     <script>
-        $('.login-btn').on('click',function(){
-            console.log('click');
+        $('.register-btn').on('click',function(){
             var account = $('#account').val();
             var password = $('#password').val();
-            $.post('/identify/login',{account: account,password: password},function(data){
-                console.log(data);
-//                window.location.href = '/';
-//                window.location.reload();
-//                if(data.ec == 200){
-//                if(data == 200){
-//                    console.log('成功登入');
-//                    //成功登入
-//                }else{
-//
-//                }
-            })
+            $.post('/register/post',{account: account,password: password},function(data){
+
+            });
         })
     </script>
-
 @endsection

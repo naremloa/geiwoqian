@@ -14,4 +14,12 @@ class WelcomeController extends Controller{
 
         return view('welcome');
     }
+
+    public function register(){
+        if(UserCheck::check()){
+            return redirect(url('/home'));
+        }
+
+        return view('register');
+    }
 }
