@@ -37,7 +37,7 @@ class LoginController extends Controller{
 //                验证账号状态是否异常
 
 //                存取登入信息
-                $auth_token = UserOperate::login($model->toArray());
+                $auth_token = UserOperate::lovgin($model->toArray());
                 $redirect = '/';
                 return Response::formatJson(200,'登入成功',['auto_token' => $auth_token, 'redirect' => $redirect]);
             }
