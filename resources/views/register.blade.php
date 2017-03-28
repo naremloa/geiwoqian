@@ -28,6 +28,10 @@
     </div>
     <div class="register-box">
         <div>
+            <label for="email">邮箱：</label>
+            <input id="email">
+        </div>
+        <div>
             <label for="account">账号：</label>
             <input id="account">
         </div>
@@ -42,7 +46,8 @@
         $('.register-btn').on('click',function(){
             var account = $('#account').val();
             var password = $('#password').val();
-            $.post('/register/post',{account: account,password: password},function(data){
+            var email = $('#email').val();
+            $.post('/register/post',{account: account,password: password,email: email},function(data){
 
             });
         })

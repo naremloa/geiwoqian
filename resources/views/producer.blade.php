@@ -1,6 +1,6 @@
 @extends('main')
 @section('title')
-    个人页
+    发起者个人页
 @endsection
 @section('link')
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\UserCheck;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,18 +12,18 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('home');
+    public function index(){
+        $user = UserCheck::getUserArray();
+        $data = [
+            'user' => $user,
+        ];
+        return view('home',$data);
+//        return $data;
+//        return view('home');
     }
 }

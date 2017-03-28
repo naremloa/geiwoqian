@@ -1,9 +1,12 @@
 @extends('main')
 @section('title')
-    个人页
+    发起者发布页
 @endsection
 @section('link')
 @endsection
 @section('content')
     @include('nav')
+    <article>
+        发布
+    </article>
 @endsection

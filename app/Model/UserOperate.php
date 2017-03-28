@@ -73,4 +73,22 @@ class UserOperate extends Model
 
         return md5($password . $time . $fake_salt);
     }
+
+
+    public static function update2Producer($user_id){
+        $model = User::find($user_id);
+        if(!$model){
+//            找不到相关用户记录
+            return null;
+        }else{
+            if($model->role == 3){
+//                用户已是发起者
+                return null;
+            }else{
+                $model->role = 3;
+                $model->save();
+                return 'success';
+            }
+        }
+    }
 }
