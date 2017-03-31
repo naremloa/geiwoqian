@@ -18,7 +18,7 @@ class LoginCheck
     {
         $token = UserCheck::check();
         if($token == ''){
-            return redirect('/home');
+            return redirect('/');
         }
 //        return redirect($token);
 //        if(UserCheck::check()){

@@ -6,6 +6,9 @@
 @endsection
 @section('style')
     <style>
+        body{
+            padding: 40;
+        }
         .title{
             font-size: 20px;
         }
@@ -44,8 +47,8 @@
             var account = $('#account').val();
             var password = $('#password').val();
             $.post('/identify/login',{account: account,password: password},function(data){
-                if(data.ec != 200){
-                    alertify
+                if(data.ec == 200){
+                    location.href = '/home'
                 }
 //                window.location.href = '/';
 //                window.location.reload();

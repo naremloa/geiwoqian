@@ -9,16 +9,15 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Model
  *
  * @property int $id
+ * @property string $password
  * @property string $url_slug
  * @property string $name
  * @property string $email
- * @property string $password
  *
  * @property int $status    0：默认值； 1：一般用户； 2往后预留； 4：ban用户； 100：管理员；
  * @property int $role    0：默认值； 1：一般用户； 2：参与者； 3：发起者
- * @property string $intro
+ * @property int $follow_count
  * @property string $avatar
- * @property string $cover
  *
  * @property string $create_time
  * @property string $update_time

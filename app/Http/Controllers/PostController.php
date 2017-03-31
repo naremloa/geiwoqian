@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Model\UserCheck;
 use Illuminate\Http\Request;
 use App\Model\Producer;
+use App\Model\Post;
+use App\Libraries\Response;
 
 class PostController extends Controller
 {
@@ -25,5 +27,20 @@ class PostController extends Controller
             return view('post',$data);
 //            return $data;
         }
+    }
+
+    public static function postNew(){
+        $user_id = UserCheck::getUserId();
+        $title = \Request::input('title','');
+        $content = \Request::input('content','');
+        $model = Post::addPost($user_id,$title,$content);
+        if(!$model){
+//            存取内容失败
+        }else{
+            $model = $model->toArray();
+            return Response::formatJson(200,'成功',$model);
+        }
+
+
     }
 }

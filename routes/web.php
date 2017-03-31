@@ -19,10 +19,12 @@ Route::post('/register/post','RegisterController@postregister');
 //Route::post('/identify/register','Identify\RegisterController@')
 
 Route::group(['middleware' => 'login'], function(){
+    Route::get('/identify/logout','Identify\LoginController@logout');
     Route::get('/home','HomeController@index');
     Route::get('/producer','ProducerController@index');
     Route::post('/apply/producer','ProducerController@postApply');
     Route::get('/post','PostController@index');
+    Route::post('/post/submit/new','PostController@postNew');
 //    Route::get('/home', function(){
 //        return '登入成功';
 //    });

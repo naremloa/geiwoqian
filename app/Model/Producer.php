@@ -5,10 +5,34 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\User;
 
+/**
+ * Class Producer
+ * @package App\Model
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $url_slug 对发起者进行各种相关操作都用url_slug，不用id
+ * @property string $name
+ * @property string $intro
+ * @property string $avatar
+ * @property string $cover
+ * @property int $status
+ * @property int $balance    账户余额
+ * @property int $get_fund_per_month    每月获赠金额
+ * @property int $backer_count    支持人总数
+ * @property int $follower_count    关注者总数
+ * @property string $create_time
+ * @property string $update_time
+ *
+ */
+
 class Producer extends Model
 {
     //
     protected $table = 'producer';
+//    都使用url_slug操作，检查完后，去掉id
+//    todo
+//    protected $hidden = ['id'];
 
     public $timestamps = false;
 

@@ -11,6 +11,9 @@ body{
 a{
     text-decoration: none;
 }
+input{
+    outline: 0;
+}
 
 
 .bg-transparent{
@@ -24,6 +27,9 @@ a{
 }
 .ml-40{
     margin-left: 40px;
+}
+.mt-40{
+    margin-top: 40px;
 }
 .fs14{
     font-size: 14px;
@@ -66,4 +72,29 @@ a{
 .clearfix:after {clear: both;}
 .pointer{
     cursor: pointer;
+}
+
+.cl-btn{
+    background: rgba(0, 0, 0, .2);
+    padding: 5px 20px;
+    cursor: pointer;
+}
+.cl-btn:hover{
+    background: rgba(0, 0, 0, .5);
+}
+.cl-input{
+    padding: 5px 10px;
+    outline: 0;
+    box-sizing: border-box;
+}
+.text-div{
+    border: 1px solid rgba(0, 0, 0, .5);
+    min-height: 100px;
+    width: 100%;
+    height: auto;
+    outline: 0;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }

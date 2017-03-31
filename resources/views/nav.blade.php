@@ -69,6 +69,7 @@
     <div class="web-only">
         <div class="nav-wrapper relative">
             <a class="logo ml-40" href="/home"><span class="ft-color-white fs32">GeiWoQian</span></a>
+            <a class="logout ml-40 ft-color-white pointer" href="/identify/logout">注销</a>
             <div class="user-block clearfix">
                 @if($user['role'] != 3)
                     <div class="fl mr-10">
@@ -99,6 +100,14 @@
             $.post('/apply/producer',function(data){
 
             })
+        })
+        $('.header-nav .logout').on('click',function(){
+//            $.post('/post/logout',function(data){
+//                if(data.ec == 200){
+//                    location.href='/';
+//                    window.location.reload();
+//                }
+//            })
         })
     })
 </script>

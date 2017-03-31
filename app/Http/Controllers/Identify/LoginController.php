@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\UserOperate;
 use App\Libraries\Response;
+use App\Model\UserCheck;
 
 class LoginController extends Controller{
     public function postlogin(){
@@ -44,5 +45,11 @@ class LoginController extends Controller{
             }
         }
         return Response::formatJson(404, '邮箱或密码错误');
+    }
+
+    public function logout(){
+        UserOperate::logout();
+
+        return redirect('/');
     }
 }
