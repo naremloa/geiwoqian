@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
  * Class User
  * @package App\Model
  *
- * @property int $id
+ * @property int $id    一般用户操作没有url_slug，直接用id操作，但最终往页面输出数据的时候可剔除
+ * @property string $email    邮件系统没做前，email先暂时充当登陆用户名 todo
  * @property string $password
- * @property string $url_slug
- * @property string $name
- * @property string $email
+ * @property string $name    昵称，随意修改
  *
- * @property int $status    0：默认值； 1：一般用户； 2往后预留； 4：ban用户； 100：管理员；
+ * @property int $status    0：默认值； 1：一般用户； 2往后预留； 4：ban用户； 100：管理员；  最终往页面输出数据的时候可剔除
  * @property int $role    0：默认值； 1：一般用户； 2：参与者； 3：发起者
- * @property int $follow_count
+ *
  * @property string $avatar
+ * @property int $follow_count
  *
  * @property string $create_time
  * @property string $update_time
@@ -37,12 +37,13 @@ class User extends Model
     /**
      * 登录用，通过获取账号查找相关数据
      * 暂时的，会改动
+     * todo
      *
      * @param $account
      * @return mixed
      */
     public static function findByAccount($account) {
-        return User::where("name", '=', $account)->first();
+        return User::where("email", '=', $account)->first();
     }
 
     /**
@@ -62,16 +63,14 @@ class User extends Model
 
     /**
      * 用户信息对外输出时进行重写
-     * 可输出信息包括：id, name, url_slug, avatar, cover, intro, status, role
-     * 其中，后续处理要注意，若是用户角色不为发起者，cover, intro 两个输出信息没有意义，可剔除
+     * 可输出信息包括：id, name, status, role, avatar, follow_count
      * 考虑到许多后续处理需要用到id , status, 这里的格式化依旧会输出id， status, 但最终像页面输出时要剔除掉
-     * 用户信息考虑删除掉 cover, intro,
      *
      * @param $old_info
      * @return array
      */
     public static function UserInfoOutput($old_info){
-        $safe_info = array('id','name','url_slug','avatar','cover','intro','status','role');
+        $safe_info = array('id','name','status','role','avatar','follow_count');
         $new_info = [];
         foreach($old_info as $k => $v){
             if(in_array($k, $safe_info)){
@@ -98,16 +97,17 @@ class User extends Model
 
     /**
      * 获取多用户信息，已单独对输出数据格式化
-     * 其中，后续处理要注意，若是用户角色不为发起者，cover, intro 两个输出信息没有意义，可剔除
      *
      * @param $user_ids
      * @param array $select
+     * @return array
      */
     public static function getUsers($user_ids, $select = array()){
         if(!$select){
-            $select = ['id', 'name', 'url_slug', 'intro', 'avatar', 'cover','status','role'];
+            $select = ['id','name','status','role','avatar','follow_count'];
         }
         $data = self::getUsersInfo($user_ids, $select);
+        return $data;
     }
     /**
      * @param array $user_ids
@@ -125,7 +125,7 @@ class User extends Model
         }
         $users = User::whereIn('id',$user_ids);
         if(!$select){
-            $select = ['id', 'name', 'url_slug', 'intro', 'avatar', 'cover'];
+            $select = ['id','name','status','role','avatar','follow_count'];
         };
         $users = $users->select($select);
         $users = $users->get()->toArray();
@@ -138,5 +138,10 @@ class User extends Model
             }
         }
         return $data;
+    }
+
+    public static function getUserFollowCount($user_id){
+        $follow_count = User::where('id',$user_id)->first()->follow_count;
+        return $follow_count;
     }
 }

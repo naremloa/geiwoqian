@@ -24,12 +24,13 @@ class UserFeed extends Model
 
     public $timestamps = false;
 
-    public static function addUserFeed($feed, $user_id){
+    public static function addUserFeed($feed, $follower_ids){
         $model = new UserFeed();
         $time = time();
         $model->producer_id = $feed['publisher_id'];
-        $model->user_id = $user_id;
+        $model->user_id = ;
         $model->feed_id = $feed['id'];
+        $model->limit_grade = $feed['limit_grade'];
         $model->create_time = $time;
         $model->update_time = $time;
         $model->save();

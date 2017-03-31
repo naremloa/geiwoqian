@@ -38,14 +38,15 @@ class Producer extends Model
 
     /**
      * 发起者信息对外输出时进行重写
-     * 可输出信息包括：name, url_slug, avatar, cover
+     * 可输出信息包括：id, url_slug, name, intro, avatar, cover, get_fund_per_month, backer_count, follower_count
      * 发起者的输出信息格式化不输出id，后续操作统一用url_slug进行操作
+     * 暂时先用着id
      *
      * @param $old_info
      * @return array
      */
     public static function ProducerInfoOutput($old_info){
-        $safe_info = array('url_slug','name','avatar','cover');
+        $safe_info = array('id', 'url_slug', 'name', 'intro', 'avatar', 'cover', 'get_fund_per_month', 'backer_count', 'follower_count');
         $new_info = [];
         foreach($old_info as $k => $v){
             if(in_array($k, $safe_info)){
@@ -58,11 +59,11 @@ class Producer extends Model
     /**
      * 获取单发起者信息，已对输出数据格式化
      *
-     * @param $user_id
+     * @param $producer_id
      * @return array
      */
-    public static function getProducer($user_id){
-        $producer = Producer::where('user_id',$user_id)->first();
+    public static function getProducer($producer_id){
+        $producer = Producer::where('id',$producer_id)->first();
         if($producer){
             $producer = $producer->toArray();
             $producer = Producer::ProducerInfoOutput($producer);
@@ -85,14 +86,21 @@ class Producer extends Model
 //            这里暂时先这么写着，为了保持url_slug的唯一性，后面会增加成为发起者时填写url_slug和检测重复性功能
             $model->url_slug = $user['name'];
             $model->name = $user['name'];
+            $model->intro = '';
             $model->avatar = $user['avatar'];
             $model->cover = 'default';
             $model->status = 1;
+            $model->balance = 0;
+            $model->get_fund_per_month = 0;
+            $model->backer_count = 0;
+            $model->follower_count = 0;
             $model->create_time = $time;
             $model->update_time = $time;
             $model->save();
+
             unset($model->id);
             unset($model->user_id);
+            unset($model->status);
             return $model;
         }
     }

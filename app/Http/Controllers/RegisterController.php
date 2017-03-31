@@ -12,8 +12,8 @@ class RegisterController extends Controller
     //
     public function postregister(){
         $account = trim(\Request::input('account'));
+        $name = trim(\Request::input('name'));
         $password = trim(\Request::input('password'));
-        $email = trim(\Request::input('email'));
         $time = time();
 
 //        $model = User::findByEmail($account);
@@ -23,21 +23,22 @@ class RegisterController extends Controller
         }else{
             $model = new User();
         }
-        $model->name = $account;
-        $model->url_slug = $account;
         $model->password = UserOperate::encryptPassword($password, $time);
-        $model->email = $email;
+        $model->name = $name;
+        $model->email = $account;
         $model->status = 1;
-        $model->intro = '';
+        $model->role = 1;
         $model->avatar = 'default';
-        $model->cover = 'default';
+        $model->follow_count = 0;
         $model->create_time = $time;
         $model->update_time = $time;
         $model->register_time = $time;
         $model->active_time = $time;
         $model->save();
-        unset($model->id);
-        return $model;
 
+
+        unset($model->id);
+        unset($model->status);
+        return Response::formatJson(200,'成功',[]);
     }
 }

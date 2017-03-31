@@ -50,7 +50,7 @@ class UserCheck extends Model
         if(!$user){
             return [];
         }else{
-            $user = User::UserInfoOutput($user);
+            $user = User::getUser($user_id);
         }
 //        暂时不启用，视情况加上
 //        UserCheck::$userArray = $user;
@@ -76,11 +76,7 @@ class UserCheck extends Model
         if($cache !== null){
             $user = $cache;
         }else{
-            $user = [];
-            $model = User::find($user_id);
-            if($model){
-                $user = $model->toArray();
-            }
+            $user = User::getUser($user_id);
             RequestCache::setValue($cache_key, $user);
         }
         return $user;
