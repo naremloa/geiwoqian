@@ -23,8 +23,10 @@ Route::group(['middleware' => 'login'], function(){
     Route::get('/home','HomeController@index');
     Route::get('/producer','ProducerController@index');
     Route::post('/apply/producer','ProducerController@postApply');
-    Route::get('/post','PostController@index');
+    Route::get('/postpage','PostController@index');
     Route::post('/post/submit/new','PostController@postNew');
+    Route::post('/post/follow','FollowController@postFollow');
+    Route::get('/feed/{url_slug}','FeedController@index');
 //    Route::get('/home', function(){
 //        return '登入成功';
 //    });

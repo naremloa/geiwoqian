@@ -7,6 +7,7 @@ use App\Model\UserFeed;
 use Illuminate\Http\Request;
 use App\Jobs\Feed\Broadcast;
 use App\Model\Follow;
+use App\Model\Producer;
 
 /**
  * Class Feed
@@ -55,9 +56,17 @@ class Feed extends Model
      * @param $feed
      */
     public function broadcastFeed($feed){
-//        这里先分发给编号4用户，待改
-//        todo
-        $follower_ids = Follow::getFollower();
+        $follower_ids = Follow::getFollower($feed['producer_id']);
         $model = UserFeed::addUserFeed($feed, $follower_ids);
+    }
+
+    public static function getFeedByUrlslug($url_slug){
+        $producer_id = Producer::where('url_slug',$url_slug)->first()->id;
+
+        $model = Feed::where('producer_id',$producer_id)
+                    ->paginate(2)
+                    ->setPath('/feed/{url_slug}')
+                    ->toArray();
+        return $model;
     }
 }

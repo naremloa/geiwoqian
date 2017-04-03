@@ -108,4 +108,11 @@ class Producer extends Model
     public static function deleteProducer($user_id){
         return;
     }
+
+    public static function updateProducerFollowerCount($producer_id){
+        $model = Producer::where('id',$producer_id)->first();
+        $model->follower_count++;
+        $model->save();
+        return $model->toArray();
+    }
 }

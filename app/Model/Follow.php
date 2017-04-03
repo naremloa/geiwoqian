@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\UserCheck;
 use App\Model\Producer;
+use App\Model\User;
 
 /**
  * Class Follow
@@ -12,7 +13,7 @@ use App\Model\Producer;
  *
  * @property int $user_id
  * @property int $user_follow_count
- * @property int $contribute_grade    成为参与者后，自动默认为关注。若是普通关注，则捐献等级为0
+ * @property int $contribute_grade    成为参与者后，自动默认为关注。若是普通关注，则参与等级为0
  * @property int $producer_id
  * @property int $producer_follower_count
  * @property string $create_time
@@ -21,6 +22,10 @@ use App\Model\Producer;
 
 class Follow extends Model
 {
+    protected $table = 'follow';
+
+    public $timestamps = false;
+
     //
     /**
      * 关注某个发起者
@@ -55,13 +60,16 @@ class Follow extends Model
         $model->create_time = $time;
         $model->save();
 
+        Producer::updateProducerFollowerCount($producer_id);
+        User::updateUserFollowcount($user_id);
+
         return $model->toArray();
     }
 
     public static function getFollower($producer_id){
         $model = Follow::where('producer_id',$producer_id)
+            ->select(['user_id'])
             ->get()
-            ->select(['id'])
             ->toArray();
         return $model;
     }

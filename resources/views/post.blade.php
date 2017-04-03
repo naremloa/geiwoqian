@@ -60,8 +60,8 @@
                     content: content,
                 };
                 console.log($data);
-                $.post('/post/submit/new',$data,function(e){
-                    console.log(e);
+                $.post('/post/submit/new',$data,function(data){
+                    console.log(data);
                 })
             })
         })

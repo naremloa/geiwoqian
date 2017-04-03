@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Libraries\RequestCache;
 
 /**
  * Class User
@@ -33,6 +34,8 @@ class User extends Model
     protected $hidden = ['password'];
 
     public $timestamps = false;
+
+    const CACHE_KEY = 'cache';
 
     /**
      * 登录用，通过获取账号查找相关数据
@@ -143,5 +146,14 @@ class User extends Model
     public static function getUserFollowCount($user_id){
         $follow_count = User::where('id',$user_id)->first()->follow_count;
         return $follow_count;
+    }
+
+    public static function updateUserFollowcount($user_id){
+        $model = User::where('id',$user_id)->first();
+        $model->follow_count++;
+        $model->save();
+
+        $cache_key = self::CACHE_KEY . '_user_info_' . $user_id;
+        $cache = RequestCache::setDirtValue($cache_key);
     }
 }

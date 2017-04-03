@@ -77,7 +77,7 @@
                     </div>
                 @else
                     <div class="fl mr-10">
-                        <a class="ft-color-white il-block" href="/post">发布内容</a>
+                        <a class="ft-color-white il-block" href="/postpage">发布内容</a>
                     </div>
                     <div class="fl mr-10">
                         <a class="ft-color-white il-block" href="/producer">发起者页面</a>
