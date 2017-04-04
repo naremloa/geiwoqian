@@ -58,14 +58,14 @@ class UserOperate extends Model
     }
 
     private static function setRequestToken($token, $expires){
-//            $domain = $_SERVER['HTTP_HOST'];
-//            if (strpos($domain, ":") !== false) {
-//                $domain = explode(":", $domain);
-//                $domain = $domain[0];
-//            }
-//            setcookie('token', $token, time() + $expires, '/', '.'.$domain, true);
+            $domain = $_SERVER['HTTP_HOST'];
+            if (strpos($domain, ":") !== false) {
+                $domain = explode(":", $domain);
+                $domain = $domain[0];
+            }
+            setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/', '.'.$domain, false);
         //存cookie
-        setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
+//        setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
     }
 
     public static function encryptPassword($password, $time) {
