@@ -39,6 +39,10 @@
             <label for="password">密码：</label>
             <input id="password" type="password">
         </div>
+        <div>
+            <label for="identify">验证口令：</label>
+            <input id="identify" type="identify">
+        </div>
         <div class="register-btn btn" style="margin-top: 20px;">注册</div>
     </div>
     <a href="/">跳到登入页</a>
@@ -47,7 +51,8 @@
             var account = $('#account').val();
             var password = $('#password').val();
             var name = $('#name').val();
-            $.post('/register/post',{account: account,name: name,password: password},function(data){
+            var identify = $('#identify').val();
+            $.post('/register/post',{account: account,name: name,password: password,identify: identify},function(data){
                 if(data.ec == 200){
                     location.href = "/";
                 }
