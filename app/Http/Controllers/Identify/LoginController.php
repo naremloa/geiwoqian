@@ -40,10 +40,8 @@ class LoginController extends Controller{
 
 //                存取登入信息
                 $auth_token = UserOperate::login($model->toArray());
-                print_r($auth_token);
                 $redirect = '/';
-                $get_cookie = UserCheck::getRequestToken();
-                return Response::formatJson(200,'登入成功',['auto_token' => $auth_token, 'redirect' => $redirect,'get_cookie' => $get_cookie]);
+                return Response::formatJson(200,'登入成功',['auto_token' => $auth_token, 'redirect' => $redirect]);
             }
         }
         return Response::formatJson(404, '邮箱或密码错误');
