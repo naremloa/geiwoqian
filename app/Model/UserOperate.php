@@ -63,7 +63,7 @@ class UserOperate extends Model
                 $domain = explode(":", $domain);
                 $domain = $domain[0];
             }
-            setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/', '.'.$domain, false);
+            setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/', '.'.$domain, true);
         //存cookie
 //        setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
     }
