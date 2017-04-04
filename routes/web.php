@@ -15,7 +15,7 @@
 Route::get('/','WelcomeController@index');
 Route::post('/identify/login','Identify\LoginController@postlogin');
 Route::get('/register','WelcomeController@register');
-Route::post('/register/post','RegisterController@postregister');
+//Route::post('/register/post','RegisterController@postregister');
 //Route::post('/identify/register','Identify\RegisterController@')
 
 Route::group(['middleware' => 'login'], function(){
