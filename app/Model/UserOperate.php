@@ -58,12 +58,13 @@ class UserOperate extends Model
     }
 
     private static function setRequestToken($token, $expires){
-            $domain = $_SERVER['HTTP_HOST'];
-            if (strpos($domain, ":") !== false) {
-                $domain = explode(":", $domain);
-                $domain = $domain[0];
-            }
-            setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/', $domain, false);
+        $domain = $_SERVER['HTTP_HOST'];
+        $secure = false;
+        if (strpos($domain, ":") !== false) {
+            $domain = explode(":", $domain);
+            $domain = $domain[0];
+        }
+        setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/', $domain, $secure, true);
         //存cookie
 //        setcookie(self::LOGIN_COOKIE_KEY, $token, time() + $expires, '/');
     }
