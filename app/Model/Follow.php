@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\UserCheck;
 use App\Model\Producer;
 use App\Model\User;
+use App\Jobs\Feed\BroadcastUpdate;
 
 /**
  * Class Follow
@@ -60,13 +61,26 @@ class Follow extends Model
         $model->create_time = $time;
         $model->save();
 
-        Producer::updateProducerFollowerCount($producer_id);
-        User::updateUserFollowcount($user_id);
+        Producer::updateProducerFollowerCount($producer_id, 1);
+        User::updateUserFollowcount($user_id, 1);
+
+        dispatch(new BroadcastUpdate($user_id, $producer_id, 1));
 
         return $model->toArray();
     }
 
-    public static function getFollower($producer_id){
+    public static function removeFollow($user_id = null, $producer_id){
+        $model = Follow::where('producer_id',$producer_id)
+            ->where('user_id',$user_id)
+            ->delete();
+        Producer::updateProducerFollowerCount($producer_id, -1);
+        User::updateUserFollowcount($user_id, -1);
+
+        dispatch(new BroadcastUpdate($user_id, $producer_id, -1));
+        return $model;
+    }
+
+    public static function getFollowers($producer_id){
         $model = Follow::where('producer_id',$producer_id)
             ->select(['user_id'])
             ->get()

@@ -7,6 +7,7 @@ use App\Libraries\Response;
 use App\Model\Follow;
 use App\Model\Producer;
 use App\Model\UserCheck;
+use App\Model\Contribute;
 
 class FollowController extends Controller
 {
@@ -27,5 +28,18 @@ class FollowController extends Controller
 
         $model = Follow::addFollow($user['id'],$user['follow_count'],$contribute_grade,$producer['id'],$producer['follower_count'],$time);
         return Response::formatJson(200,'关注成功',$model);
+    }
+
+    public static function postRemoveFollow(){
+        $user = UserCheck::getUserArray();
+        $producer_id = \Request::input('producer_id');
+        $user_contribute_grade = Contribute::getUserContributeGrade($user['id'], $producer_id);
+        //若对当前操作发起者还是处于参与者状态，不能取消关注
+        if($user_contribute_grade === 0){
+            return Response::formatJson(400, '你还在支持他，不能取消关注', []);
+        }else{
+            $model = Follow::removeFollow($user['id'], $producer_id);
+            return Response::formatJson(200, '取消关注成功', $model);
+        }
     }
 }

@@ -65,8 +65,15 @@ class Contribute extends Model
         return $model;
     }
 
-    public static function getbacker($producer_id){
+    public static function getBacker($producer_id){
         $contributers = Contribute::where('producer_id',$producer_id)->get()->toArray();
+        return $contributers;
+    }
 
+    public static function getUserContributeGrade($user_id, $producer_id){
+        $model = Contribute::where('producer_id', $producer_id)
+            ->where('user_id', $user_id)
+            ->first();
+        return $model['contribute_grade'];
     }
 }

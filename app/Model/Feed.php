@@ -51,15 +51,35 @@ class Feed extends Model
     }
 
     /**
-     * 这是队列中的任务调动的函数，处理feed分发
+     * 队列中处理单条post任务的目标函数，通常用于提交新post后的相关feed分发
      *
      * @param $feed
      */
     public function broadcastFeed($feed){
-        $follower_ids = Follow::getFollower($feed['producer_id']);
+        $follower_ids = Follow::getFollowers($feed['producer_id']);
         $model = UserFeed::addUserFeed($feed, $follower_ids);
     }
 
+    /**
+     * 队列中处理多条feed任务的目标函数，通常用于捐献和关注时更新相关producer的所有post到个人feed中
+     *
+     * @param $producer_id
+     * @param $user_id
+     */
+    public function broadcastUpdateFeed($user_id, $producer_id, $operate_type){
+        if($operate_type == 1){
+            $feeds = Feed::where('producer_id',$producer_id)->get()->toArray();
+            $model = UserFeed::addUserFeeds($feeds, $user_id, $producer_id);
+        }else if($operate_type == -1){
+            $model = UserFeed::removeUserFeeds($user_id, $producer_id);
+        }
+
+    }
+
+    /**
+     * @param $url_slug
+     * @return mixed
+     */
     public static function getFeedByUrlslug($url_slug){
         $producer_id = Producer::where('url_slug',$url_slug)->first()->id;
 

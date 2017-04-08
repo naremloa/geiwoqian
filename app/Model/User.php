@@ -148,9 +148,9 @@ class User extends Model
         return $follow_count;
     }
 
-    public static function updateUserFollowcount($user_id){
+    public static function updateUserFollowcount($user_id, $operate_num){
         $model = User::where('id',$user_id)->first();
-        $model->follow_count++;
+        $model->follow_count = $model->follow_count + $operate_num;
         $model->save();
 
         $cache_key = self::CACHE_KEY . '_user_info_' . $user_id;

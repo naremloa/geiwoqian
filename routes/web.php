@@ -26,6 +26,7 @@ Route::group(['middleware' => 'login'], function(){
     Route::get('/postpage','PostController@index');
     Route::post('/post/submit/new','PostController@postNew');
     Route::post('/post/follow','FollowController@postFollow');
+    Route::post('/post/remove-follow','FollowController@postRemoveFollow');
     Route::get('/feed/{url_slug}','FeedController@index');
 //    Route::get('/home', function(){
 //        return '登入成功';

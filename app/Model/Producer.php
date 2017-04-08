@@ -109,9 +109,9 @@ class Producer extends Model
         return;
     }
 
-    public static function updateProducerFollowerCount($producer_id){
+    public static function updateProducerFollowerCount($producer_id, $operate_num){
         $model = Producer::where('id',$producer_id)->first();
-        $model->follower_count++;
+        $model->follower_count = $model->follower_count + $operate_num;
         $model->save();
         return $model->toArray();
     }

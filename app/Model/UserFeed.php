@@ -41,4 +41,25 @@ class UserFeed extends Model
             $model->save();
         }
     }
+
+    public static function addUserFeeds($feeds, $user_id, $producer_id){
+        UserFeed::removeUserFeeds($user_id, $producer_id);
+        foreach($feeds as $feed){
+            $model = new UserFeed();
+            $time = time();
+            $model->producer_id = $feed['producer_id'];
+            $model->user_id = $user_id;
+            $model->feed_id = $feed['id'];
+            $model->limit_grade = $feed['limit_grade'];
+            $model->create_time = $time;
+            $model->update_time = $time;
+            $model->save();
+        }
+    }
+
+    public static function removeUserFeeds($user_id, $producer_id){
+        UserFeed::where('producer_id',$producer_id)
+            ->where('user_id', $user_id)
+            ->delete();
+    }
 }
