@@ -2,7 +2,7 @@
     .header-nav{
         width: 100%;
         height: 50px;
-        background: black;
+        background: rgba(44, 44, 65, 1);
         position: fixed;
         top: 0;
         left: 0;

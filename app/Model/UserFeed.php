@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Feed;
 
 /**
  * Class UserFeed
@@ -61,5 +62,17 @@ class UserFeed extends Model
         UserFeed::where('producer_id',$producer_id)
             ->where('user_id', $user_id)
             ->delete();
+    }
+
+    public static function getUserFeed($user_id, $cur_page = 1, $per_page = 5){
+        $model = UserFeed::where('user_id', $user_id)
+            ->select(['feed_id'])
+            ->get()
+            ->toArray();
+        $feed_ids = array();
+        foreach($model as $k => $v){
+            $feed_ids[$k] = $v['feed_id'];
+        }
+        return Feed::getFeedByUserfeed($feed_ids, $cur_page, $per_page);
     }
 }

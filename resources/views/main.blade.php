@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="{{ asset('/js/alertifyjs/css/themes/default.min.css') }}">
         @yield('link')
         <script src="{{ asset('/js/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ asset('/js/vue.js') }}"></script>
+        <script src="{{ asset('/js/artTemplate.js') }}"></script>
         @yield('style')
     </head>
     <body>

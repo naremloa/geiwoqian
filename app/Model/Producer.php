@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\User;
+use App\Libraries\DateFormat;
 
 /**
  * Class Producer
@@ -114,5 +115,14 @@ class Producer extends Model
         $model->follower_count = $model->follower_count + $operate_num;
         $model->save();
         return $model->toArray();
+    }
+
+    public static function getProducerInfoByFeed($feed){
+        foreach($feed as $k){
+            $k = DateFormat::addTimeShow($k);
+            $k['producer_info'] = Producer::getProducer($k['producer_id']);
+
+        }
+        return $feed;
     }
 }
