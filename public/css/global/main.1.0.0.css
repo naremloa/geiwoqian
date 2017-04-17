@@ -7,6 +7,8 @@ html,body{
 }
 body{
     padding: 70px 0;
+    background: rgba(39, 40, 56, 1);
+    color: white;
 }
 a{
     text-decoration: none;
@@ -27,6 +29,9 @@ input{
 }
 .mr-10{
     margin-right: 10px;
+}
+.mt-10{
+    margin-top: 10px;
 }
 .ml-40{
     margin-left: 40px;
@@ -81,6 +86,7 @@ input{
     background: rgba(0, 0, 0, .2);
     padding: 5px 20px;
     cursor: pointer;
+    color: white;
 }
 .cl-btn:hover{
     background: rgba(0, 0, 0, .5);

@@ -21,6 +21,7 @@ Route::post('/register/post','RegisterController@postregister');
 Route::group(['middleware' => 'login'], function(){
     Route::get('/identify/logout','Identify\LoginController@logout');
     Route::get('/home','HomeController@index');
+    Route::get('/user/timeline','HomeController@getTimeline');
     Route::get('/producer','ProducerController@index');
     Route::post('/apply/producer','ProducerController@postApply');
     Route::get('/postpage','PostController@index');
