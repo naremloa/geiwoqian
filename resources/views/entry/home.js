@@ -23,6 +23,7 @@ const feed = new Vue({
     data:function(){
         return{
             feeds: BLADE.feed,
+            producer_all: BLADE.producer_all,
             loading: 0,
             cur_page: 1,
             has_more: 1,
@@ -35,10 +36,10 @@ const feed = new Vue({
     },
     created:function(){
         let _this = this;
-        $(window).on('scroll',function(){
-            let scrollTop = $(this).scrollTop();
+        function getTimeline(data){
+            let scrollTop = $(data).scrollTop();
             let scrollHeight = $(document).height();
-            let windowHeight = $(this).height();
+            let windowHeight = $(data).height();
             if(_this.has_more && scrollTop + windowHeight + 200 >= scrollHeight){
                 if(!_this.loading){
                     _this.loading = 1;
@@ -56,6 +57,10 @@ const feed = new Vue({
                     });
                 }
             }
+        }
+        getTimeline(window);
+        $(window).on('scroll',function(){
+            getTimeline(this);
         })
     },
 });

@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     @include('nav')
-    <article style="width: 960px; margin: 0 auto; height: 500px;">
+    <article style="width: 960px; margin: 0 auto; height: 500px; padding-top: 70px;">
         <div class="post-box" style="text-align: center; height: auto; box-sizing: border-box;">
             <a class="cl-btn post-start-btn" onselectstart="return false">发布文字</a>
             <a class="cl-btn post-cancel-btn hide" onselectstart="return false">取消</a>
@@ -21,10 +21,6 @@
             </div>
         </div>
     </article>
-    <section id="box">
-        <vm-test></vm-test>
-    </section>
-    <script src="{{ asset('/dist/entry/post.js') }}"></script>
     <script>
         $(function(){
             $('.post-box .post-start-btn').on('click',function(e){
@@ -63,9 +59,15 @@
                     title: title,
                     content: content,
                 };
-                console.log($data);
                 $.post('/post/submit/new',$data,function(data){
-                    console.log(data);
+                    if(data.ec == 200){
+                        alertify.success('发布成功');
+                        setTimeout(function(){
+                            location.reload();
+                        },1000)
+                    }else{
+                        alertify.error('data.em');
+                    }
                 })
             })
         })

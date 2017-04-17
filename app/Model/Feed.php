@@ -102,4 +102,16 @@ class Feed extends Model
         }
         return Post::getPostByFeed($post_ids, ($cur_page - 1) * $per_page, $per_page);
     }
+
+    public static function getFeedByProducerid($producer_id, $cur_page = 1, $per_page = 5){
+        $feeds = Feed::where('producer_id', $producer_id)
+            ->select(['post_id'])
+            ->get()
+            ->toArray();
+        $post_ids = array();
+        foreach($feeds as $k => $v){
+            $post_ids[$k] = $v['post_id'];
+        }
+        return Post::getPostByFeed($post_ids, ($cur_page - 1) * $per_page, $per_page);
+    }
 }

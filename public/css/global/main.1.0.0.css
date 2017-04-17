@@ -6,7 +6,6 @@ html,body{
     font-size: 14px;
 }
 body{
-    padding: 70px 0;
     background: rgba(39, 40, 56, 1);
     color: white;
 }
@@ -33,11 +32,17 @@ input{
 .mt-10{
     margin-top: 10px;
 }
+.ml-20{
+    margin-left: 20px;
+}
 .ml-40{
     margin-left: 40px;
 }
 .mt-40{
     margin-top: 40px;
+}
+.pt-40{
+    padding-top: 40px;
 }
 .fs14{
     font-size: 14px;
@@ -84,6 +89,7 @@ input{
 
 .cl-btn{
     background: rgba(0, 0, 0, .2);
+    box-sizing: border-box;
     padding: 5px 20px;
     cursor: pointer;
     color: white;
@@ -95,6 +101,14 @@ input{
     padding: 5px 10px;
     outline: 0;
     box-sizing: border-box;
+}
+.cl-card{
+    background: #2c2c41;
+    padding: 20px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    color: white;
 }
 .text-div{
     border: 1px solid rgba(0, 0, 0, .5);
@@ -110,4 +124,25 @@ input{
 
 .flex-box{
     display: flex;
+}
+.flex-item-1{
+    flex: 1;
+}
+.flex-justify-content-space-between{
+    justify-content: space-between;
+}
+
+.cl-wrap{
+    width: 960px;
+    margin: 0 auto;
+}
+.cl-wrap-left{
+    width: 640px;
+    margin-right: 20px;
+}
+.cl-wrap-right{
+    width: 300px;
+}
+.circle{
+    border-radius: 1000px;
 }

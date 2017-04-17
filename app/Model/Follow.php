@@ -87,4 +87,15 @@ class Follow extends Model
             ->toArray();
         return $model;
     }
+
+    public static function isFollow($user_id, $producer_id){
+        $model = Follow::where('producer_id',$producer_id)
+            ->where('user_id',$user_id)
+            ->first();
+        if($model){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }

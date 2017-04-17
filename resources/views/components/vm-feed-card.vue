@@ -1,4 +1,12 @@
 <style>
+    .vm-feed-card{
+        background: #2c2c41;
+        padding: 20px;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        color: white;
+    }
     .vm-feed-card .card-content{
         line-height: 1.7;
         word-break: break-all;

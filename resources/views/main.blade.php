@@ -12,10 +12,10 @@
         <script src="{{ asset('/js/jquery-3.1.1.min.js') }}"></script>
         <script src="{{ asset('/js/vue.js') }}"></script>
         <script src="{{ asset('/js/artTemplate.js') }}"></script>
+        <script src="{{ asset('/js/alertifyjs/alertify.min.js') }}"></script>
         @yield('style')
     </head>
     <body>
         @yield('content')
-        <script src="{{ asset('/js/alertifyjs/alertify.min.js') }}"></script>
     </body>
 </html>

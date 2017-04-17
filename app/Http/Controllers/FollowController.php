@@ -21,6 +21,9 @@ class FollowController extends Controller
         if(!$producer_id){
             return Response::formatJson(404,'请关注有效的发起者',$producer_id);
         }
+        if($user['id'] == $producer_id){
+            return Response::formatJson(500,'请不要关注你自己','');
+        }
         $producer = Producer::getProducer($producer_id);
         if(!$producer){
             return Response::formatJson(404,'请关注有效的发起者',$producer);

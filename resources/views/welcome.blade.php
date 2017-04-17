@@ -49,6 +49,8 @@
             $.post('/identify/login',{account: account,password: password},function(data){
                 if(data.ec == 200){
                     location.href = '/home'
+                }else{
+                    alertify.error(data.em);
                 }
 //                window.location.href = '/';
 //                window.location.reload();

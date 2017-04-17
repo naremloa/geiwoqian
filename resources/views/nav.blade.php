@@ -80,14 +80,12 @@
                         <a class="ft-color-white il-block" href="/postpage">发布内容</a>
                     </div>
                     <div class="fl mr-10">
-                        <a class="ft-color-white il-block" href="/producer">发起者页面</a>
+                        <a class="ft-color-white il-block" href="/producer/{{$producer['url_slug']}}">发起者页面</a>
                     </div>
                 @endif
                 <div class="user-site fl">
                     <span class="user-avatar-box">
-                        @if($user['avatar'] == 'default')
-                            <img class="wh100" src="/img/default_avatar.png">
-                        @endif
+                          <img class="wh100 circle" src="/img/default_avatar.png">
                     </span>
                 </div>
             </div>

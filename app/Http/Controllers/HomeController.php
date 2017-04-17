@@ -24,9 +24,14 @@ class HomeController extends Controller
         $user = UserCheck::getUserArray();
         $feed = UserFeed::getUserFeed($user['id'], 1);
         $feed = Producer::getProducerInfoByFeed($feed);
+        $producer = Producer::getProducerByUserid($user['id']);
+        $producer_all = Producer::getProducerAll();
         $data = [
             'user' => $user,
             'feed' => $feed,
+            'producer' => $producer,
+            'is_producer' => $producer? 1 : 0,
+            'producer_all' => $producer_all,
         ];
         return view('home',$data);
 //        return $data;

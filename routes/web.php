@@ -22,7 +22,8 @@ Route::group(['middleware' => 'login'], function(){
     Route::get('/identify/logout','Identify\LoginController@logout');
     Route::get('/home','HomeController@index');
     Route::get('/user/timeline','HomeController@getTimeline');
-    Route::get('/producer','ProducerController@index');
+    Route::get('/producer/{url_slug}','ProducerController@index');
+    Route::get('/producer/get/timeline','ProducerController@getTimeline');
     Route::post('/apply/producer','ProducerController@postApply');
     Route::get('/postpage','PostController@index');
     Route::post('/post/submit/new','PostController@postNew');

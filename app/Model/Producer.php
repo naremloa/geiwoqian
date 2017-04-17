@@ -51,6 +51,16 @@ class Producer extends Model
         $new_info = [];
         foreach($old_info as $k => $v){
             if(in_array($k, $safe_info)){
+                if($k == 'avatar'){
+                    if($v == 'default'){
+                        $v = '/img/default_avatar.png';
+                    }
+                }
+                if($k == 'cover'){
+                    if($v == 'default'){
+                        $v = '/img/default_cover.png';
+                    }
+                }
                 $new_info[$k] = $v;
             }
         }
@@ -65,6 +75,24 @@ class Producer extends Model
      */
     public static function getProducer($producer_id){
         $producer = Producer::where('id',$producer_id)->first();
+        if($producer){
+            $producer = $producer->toArray();
+            $producer = Producer::ProducerInfoOutput($producer);
+        }
+        return $producer;
+    }
+
+    public static function getProducerByUrlslug($url_slug){
+        $producer = Producer::where('url_slug', $url_slug)->first();
+        if($producer){
+            $producer = $producer->toArray();
+            $producer = Producer::ProducerInfoOutput($producer);
+        }
+        return $producer;
+    }
+
+    public static function getProducerByUserid($user_id){
+        $producer = Producer::where('user_id', $user_id)->first();
         if($producer){
             $producer = $producer->toArray();
             $producer = Producer::ProducerInfoOutput($producer);
@@ -124,5 +152,9 @@ class Producer extends Model
 
         }
         return $feed;
+    }
+
+    public static function getProducerAll(){
+        return $model = Producer::all()->toArray();
     }
 }
