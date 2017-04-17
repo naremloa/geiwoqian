@@ -21,6 +21,10 @@
             </div>
         </div>
     </article>
+    <section id="box">
+        <vm-test></vm-test>
+    </section>
+    <script src="{{ asset('/dist/entry/post.js') }}"></script>
     <script>
         $(function(){
             $('.post-box .post-start-btn').on('click',function(e){
