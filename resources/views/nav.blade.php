@@ -3,6 +3,7 @@
         width: 100%;
         height: 50px;
         background: rgba(44, 44, 65, 1);
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
         position: fixed;
         top: 0;
         left: 0;
@@ -54,6 +55,18 @@
         border-radius: 1000px;
         margin: 7px;
     }
+    .header-nav .nav-wrapper .user-block .user-site .user-menu{
+        position: absolute;
+        width: 120px;
+        left: -35px;
+        background: rgba(44, 44, 65, 1);
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
+        padding: 5px 20px;
+        box-sizing: border-box;
+    }
+    .header-nav .nav-wrapper .user-block .user-site .user-menu li{
+        cursor: pointer;
+    }
     .header-nav .nav-mobile{
         text-align: center;
         height: 50px;
@@ -80,13 +93,19 @@
                         <a class="ft-color-white il-block" href="/postpage">发布内容</a>
                     </div>
                     <div class="fl mr-10">
-                        <a class="ft-color-white il-block" href="/producer/{{$producer['url_slug']}}">发起者页面</a>
+                        <a class="ft-color-white il-block" href="/producer/{{$user['producer_info']['url_slug']}}">发起者页面</a>
                     </div>
                 @endif
-                <div class="user-site fl">
+                <div class="user-site fl relative">
                     <span class="user-avatar-box">
                           <img class="wh100 circle" src="/img/default_avatar.png">
                     </span>
+                    <div class="user-menu">
+                        <ul>
+                            <li><a>home页</a></li>
+                            <li><a>设置</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,5 +120,15 @@
                 }
             })
         });
+        var user_menu_go = null;
+//        $('.header-nav .user-block .user-site').on('mouseenter',function(){
+//            user_menu_go = null;
+//            $(this).find('.user-menu').removeClass('hide');
+//        }).on('mouseleave',function(){
+//            var _this = this;
+//            user_menu_go = setTimeout(function(){
+//                $(_this).find('.user-menu').addClass('hide');
+//            },300);
+//        })
     })
 </script>

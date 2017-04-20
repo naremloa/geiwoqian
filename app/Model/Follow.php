@@ -69,6 +69,13 @@ class Follow extends Model
         return $model->toArray();
     }
 
+    public static function updateFollowInfo($user_id, $contribute_grade, $producer_id){
+        $model = Follow::where('producer_id', $producer_id)
+            ->where('user_id', $user_id)
+            ->update(['contribute_grade' => $contribute_grade]);
+        return $model;
+    }
+
     public static function removeFollow($user_id = null, $producer_id){
         $model = Follow::where('producer_id',$producer_id)
             ->where('user_id',$user_id)

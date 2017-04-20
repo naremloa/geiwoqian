@@ -24,6 +24,10 @@ Route::group(['middleware' => 'login'], function(){
     Route::get('/user/timeline','HomeController@getTimeline');
     Route::get('/producer/{url_slug}','ProducerController@index');
     Route::get('/producer/get/timeline','ProducerController@getTimeline');
+    Route::get('/producer/{url_slug}/edit-reward', 'ProducerController@getEditReward');
+    Route::get('/producer/setting/edit','ProducerSettingController@index');
+    Route::post('/post/producer/add-reward', 'ProducerSettingController@postAddReward');
+    Route::post('/post/contribute/edit','ContributeController@postEditContribute');
     Route::post('/apply/producer','ProducerController@postApply');
     Route::get('/postpage','PostController@index');
     Route::post('/post/submit/new','PostController@postNew');

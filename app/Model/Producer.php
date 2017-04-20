@@ -145,6 +145,13 @@ class Producer extends Model
         return $model->toArray();
     }
 
+    public static function updateProducerRewardCount($producer_id, $operate_num){
+        $model = Producer::where('id',$producer_id)->first();
+        $model->reward_count = $model->reward_count + $operate_num;
+        $model->save();
+        return $model->toArray();
+    }
+
     public static function getProducerInfoByFeed($feed){
         foreach($feed as $k){
             $k = DateFormat::addTimeShow($k);
@@ -156,5 +163,17 @@ class Producer extends Model
 
     public static function getProducerAll(){
         return $model = Producer::all()->toArray();
+    }
+
+    public static function isProducer($user_id, $url_slug){
+        $model = Producer::where('user_id', $user_id)
+            ->where('url_slug', $url_slug)
+            ->get()
+            ->toArray();
+        if(count($model)){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

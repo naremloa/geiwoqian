@@ -35,6 +35,18 @@
     .vm-producer-detail .producer-body .producer-intro{
         lien-height: 1.7;
     }
+    .vm-producer-detail .producer-body .cl-card .is_producer_setting{
+        display: none;
+        cursor: pointer;
+    }
+    .vm-producer-detail .producer-body .cl-card:hover .is_producer_setting{
+        display: block;
+    }
+    .vm-producer-detail .line-2{
+        border-top: 1px solid rgba(255, 255, 255, .2);
+        width: 100%;
+        margin: 20px 0;
+    }
 </style>
 <template>
     <section class="vm-producer-detail">
@@ -53,7 +65,7 @@
                 <template v-else="is_follow == 0">
                     <div class="cl-btn follow-btn" onselectstart="return false" @click="method_follow">关注</div>
                 </template>
-                <div class="cl-btn contribute-btn ml-20" onselectstart="return false" :data-producer-id="producer_info['if']">成为支持者</div>
+                <a class="cl-btn contribute-btn ml-20" onselectstart="return false" :href="'/producer/'+producer_info.url_slug+'/edit-reward'">成为支持者</a>
             </div>
         </div>
         <div class="producer-body cl-wrap flex-box pt-40">
@@ -79,7 +91,7 @@
                     <p>部分</p>
                 </div>
                 <div class="content">
-                    <vm-feed-card v-for="data in feeds" :data="data"></vm-feed-card>
+                    <vm-feed-card v-for="data in feeds" :data="data" :key="data.id"></vm-feed-card>
                 </div>
             </div>
             <div class="cl-wrap-right">
@@ -87,17 +99,28 @@
                     <div class="flex-box">
                         <div>
                             <p>支持者</p>
-                            <p>{{producer_info['backer_count']}}</p>
+                            <p class="fs20">{{producer_info['backer_count']}}</p>
                         </div>
                         <div class="ml-40">
                             <p>被给</p>
-                            <p>￥{{producer_info['get_fund_per_month']}} / 月</p>
+                            <p class="fs20">￥{{producer_info['get_fund_per_month']}} / 月</p>
                         </div>
                     </div>
                 </div>
                 <div class="cl-card">
-                    <p class="fs20">目标</p>
-                    <p>这是目标板</p>
+                    <div class="flex-box mb-20" style="line-height: 20px;">
+                        <p class="fs20 flex-item-1">奖励</p>
+                        <p class="is_producer_setting" v-if="is_producer == 1"><a href="/producer/setting/edit" target="_blank">设置</a></p>
+                    </div>
+                    <template v-for="(data, index) in reward">
+                        <p class="fs20">{{data.reward_title}}</p>
+                        <p class="mt-10 white-2">￥{{data.reward_fund}} 或更多</p>
+                        <div class="mt-10">{{data.reward_description}}</div>
+                        <div class="flex-box mt-10">
+                            <a class="cl-btn" :href="'/producer/' + producer_info.url_slug + '/edit-reward?reward_card=' + index">支持 | ￥{{data.reward_fund}}</a>
+                        </div>
+                        <div v-if="index < reward.length - 1" class="line-2"></div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -110,7 +133,9 @@
             return{
                 producer_info: BLADE.producer,
                 feeds: BLADE.feed,
+                reward: BLADE.reward,
                 is_follow: BLADE.is_follow,
+                is_producer: BLADE.is_producer,
                 loading: 0,
                 cur_page: 1,
                 has_more: 1,

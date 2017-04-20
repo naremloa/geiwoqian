@@ -2,23 +2,7 @@ import Vue from 'vue'
 import vmTest from '../components/vm-test.vue'
 import vmFeedCard from '../components/vm-feed-card.vue'
 
-var VueRouter = require('vue-router')
-
-Vue.use(VueRouter);
-
-const Foo = { template: '<div>foo</div>' }
-const Bar = { template: '<div>bar</div>' }
-
-const routes = [
-    { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar }
-]
-const router = new VueRouter({
-    routes: routes,
-})
-
 const feed = new Vue({
-    router: router,
     el: '.feed',
     data:function(){
         return{
@@ -64,4 +48,3 @@ const feed = new Vue({
         })
     },
 });
-console.log(feed);

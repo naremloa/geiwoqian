@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Feed;
+use App\Model\Reward;
 use App\Model\UserCheck;
 use App\Model\Producer;
 use App\Libraries\Response;
@@ -16,13 +17,15 @@ class ProducerController extends Controller
         $user = UserCheck::getUserArray();
         $per_page = 5;
 //        $user['role'] == 3 发起者
-//        若角色不为发起者，重定向到个人页，前端记得也要隐藏入口
-//        if($user['role'] != 3){
-//            return redirect('/home');
-//        }else{
+        if($user['role'] == 3) {
+            $user['producer_info'] = Producer::getProducerByUserid($user['id']);
+        }
         $producer = Producer::getProducerByUrlslug($url_slug);
         $is_follow = Follow::isFollow($user['id'], $producer['id']);
         $feed = Feed::getFeedByProducerid($producer['id']);
+        $is_producer = Producer::isProducer($user['id'], $url_slug);
+
+        $reward = Reward::getReward($producer['id']);
 
         $data = [
             'user' => $user,
@@ -30,10 +33,11 @@ class ProducerController extends Controller
             'feed' => $feed,
             'is_follow' => $is_follow,
             'has_more' => count($feed) == $per_page? 1: 0,
+            'is_producer' => $is_producer,
+            'reward' => $reward,
         ];
         return view('producer',$data);
 //            return $data;
-//        }
     }
 
     public function getTimeline(){
@@ -76,5 +80,28 @@ class ProducerController extends Controller
             return Response::formatJson(200,'成功',$model);
 
         }
+    }
+
+    public function getEditReward($url_slug){
+        $user = UserCheck::getUserArray();
+//        $user['role'] == 3 发起者
+        if($user['role'] == 3) {
+            $user['producer_info'] = Producer::getProducerByUserid($user['id']);
+        }
+        $producer = Producer::getProducerByUrlslug($url_slug);
+
+        if($producer['id'] === $user['producer_info']['id']){
+            return redirect('/producer/'. $url_slug);
+        }
+
+        $reward = Reward::getReward($producer['id']);
+
+        $data = [
+            'user' => $user,
+            'producer' => $producer,
+            'reward' => $reward,
+        ];
+        return view('edit_reward', $data);
+//        return $data;
     }
 }

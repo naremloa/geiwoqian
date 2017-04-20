@@ -11,11 +11,19 @@ body{
 }
 a{
     text-decoration: none;
+    color: white;
 }
 input{
     outline: 0;
 }
-
+p,div{
+    margin: 0;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
 .bg-transparent{
     background: transparent;
@@ -32,8 +40,14 @@ input{
 .mt-10{
     margin-top: 10px;
 }
+.mt-20{
+    margin-top: 20px;
+}
 .ml-20{
     margin-left: 20px;
+}
+.mb-20{
+    margin-bottom: 20px;
 }
 .ml-40{
     margin-left: 40px;
@@ -88,6 +102,7 @@ input{
 }
 
 .cl-btn{
+    display: block;
     background: rgba(0, 0, 0, .2);
     box-sizing: border-box;
     padding: 5px 20px;
@@ -101,6 +116,9 @@ input{
     padding: 5px 10px;
     outline: 0;
     box-sizing: border-box;
+    background: rgba(0, 0, 0, .2);
+    border: 0;
+    color: white;
 }
 .cl-card{
     background: #2c2c41;
@@ -109,6 +127,16 @@ input{
     box-sizing: border-box;
     margin-bottom: 20px;
     color: white;
+}
+.cl-radio{
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 1000px;
+    width: 12px;
+    height: 12px;
+}
+.on .cl-radio{
+    border: 2px solid rgba(255, 66, 95, 1);
+    background: rgba(255, 66, 95, 1);
 }
 .text-div{
     border: 1px solid rgba(0, 0, 0, .5);
@@ -145,4 +173,8 @@ input{
 }
 .circle{
     border-radius: 1000px;
+}
+
+.white-2{
+    color: rgba(255, 255, 255, .2);
 }

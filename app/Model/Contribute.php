@@ -16,6 +16,7 @@ use App\Model\Producer;
  * @property int $contribute_grade
  * @property int $producer_id
  * @property string $create_time
+ * @property string $update_time
  *
  */
 
@@ -24,6 +25,8 @@ class Contribute extends Model
     //
     protected $table = 'contribute';
 
+
+    public $primaryKey = null;
     public $timestamps = false;
 
     /**
@@ -37,7 +40,7 @@ class Contribute extends Model
      * @param $producer_id
      * @return Contribute
      */
-    public static function addContributer($user_id = null, $user_follow_count = null,$fun_per_month, $contribute_grade, $producer_id){
+    public static function addContributer($user_id = null, $user_follow_count = null,$fund_per_month, $contribute_grade, $producer_id){
         //没有传用户相关信息时，默认操作者为当前登陆用户
         if(!$user_id){
             $user = UserCheck::getUserArray();
@@ -47,10 +50,11 @@ class Contribute extends Model
         $time = time();
         $model = new Contribute();
         $model->user_id = $user_id;
-        $model->fund_per_month = $fun_per_month;
+        $model->fund_per_month = $fund_per_month;
         $model->contribute_grade = $contribute_grade;
         $model->producer_id = $producer_id;
         $model->create_time = $time;
+        $model->update_time = $time;
         $model->save();
 
         $model->toArray();
@@ -65,7 +69,15 @@ class Contribute extends Model
         return $model;
     }
 
-    public static function getBacker($producer_id){
+    public static function updateContributerInfo($user_id, $fund_per_month, $contribute_grade, $producer_id){
+        $model = Contribute::where('producer_id', $producer_id)
+            ->where('user_id', $user_id)
+            ->update(['fund_per_month' => $fund_per_month, 'contribute_grade' => $contribute_grade]);
+        Follow::updateFollowInfo($user_id, $contribute_grade, $producer_id);
+        return $model;
+    }
+
+    public static function getContributer($producer_id){
         $contributers = Contribute::where('producer_id',$producer_id)->get()->toArray();
         return $contributers;
     }
@@ -75,5 +87,16 @@ class Contribute extends Model
             ->where('user_id', $user_id)
             ->first();
         return $model['contribute_grade'];
+    }
+
+    public static function isContribute($user_id, $producer_id){
+        $model = Contribute::where('producer_id', $producer_id)
+            ->where('user_id', $user_id)
+            ->first();
+        if(count($model)){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }

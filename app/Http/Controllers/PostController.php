@@ -13,6 +13,9 @@ class PostController extends Controller
     //
     public static function index(){
         $user = UserCheck::getUserArray();
+        if($user['role'] == 3) {
+            $user['producer_info'] = Producer::getProducerByUserid($user['id']);
+        }
 //        $user['role'] == 3 发起者
 //        若角色不为发起者，重定向到个人页，前端记得也要隐藏入口
         if($user['role'] != 3){

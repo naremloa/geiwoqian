@@ -22,6 +22,9 @@ class HomeController extends Controller
 
     public function index(){
         $user = UserCheck::getUserArray();
+        if($user['role'] == 3) {
+            $user['producer_info'] = Producer::getProducerByUserid($user['id']);
+        }
         $feed = UserFeed::getUserFeed($user['id'], 1);
         $feed = Producer::getProducerInfoByFeed($feed);
         $producer = Producer::getProducerByUserid($user['id']);
