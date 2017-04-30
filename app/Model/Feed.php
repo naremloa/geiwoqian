@@ -9,6 +9,7 @@ use App\Jobs\Feed\Broadcast;
 use App\Model\Follow;
 use App\Model\Producer;
 use App\Model\Post;
+use zgldh\QiniuStorage\QiniuStorage;
 
 /**
  * Class Feed

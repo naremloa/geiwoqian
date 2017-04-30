@@ -62,6 +62,20 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => 'onmpkkp5b.bkt.clouddn.com', //你的七牛域名
+//                'https'     => 'dn-laravelacademy.qbox.me',         //你的HTTPS域名
+                'https'     => '',
+//                'custom'    => 'static.laravelacademy.org',     //你的自定义域名
+                'custom'     => '',
+            ],
+            'access_key'=> 'Z0SNHSELoJ2QZdW4Wo7SeybVu_g1brG8CMnEzXh9',  //AccessKey
+            'secret_key'=> 'MgJyO0zZQTFXU2UVUytfWVCkhsTBQCKQB5vifrsM',  //SecretKey
+            'bucket'    => 'project',  //Bucket名字
+            'notify_url'=> '',  //持久化处理回调地址
+        ],
 
     ],
 

@@ -5,7 +5,6 @@
 @section('link')
 @endsection
 @section('content')
-    @include('nav')
     <style>
         .feed .feed_head p{
             padding: 10px;
@@ -18,6 +17,9 @@
             box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
         }
     </style>
+    <section class="nav">
+        <vm-nav :user="user"></vm-nav>
+    </section>
     <article class="feed flex-box" style="width: 960px; margin: 0 auto; padding-top: 70px;">
         <div class="cl-wrap-left">
             <div class="feed_head flex-box">
@@ -50,14 +52,19 @@
                     </a>
                 </div>
             </div>
+            <div class="cl-card">
+                <input type="file" name="file" id="fileupload">
+            </div>
         </div>
 
     </article>
     <script>
         window.BLADE = {
             feed: {!! json_encode($feed) !!},
-            producer_all: {!! json_encode($producer_all) !!}
+            producer_all: {!! json_encode($producer_all) !!},
+            user: {!! json_encode($user) !!},
         };
     </script>
     <script src="{{ asset('/dist/entry/home.js') }}"></script>
+    <script src="{{ asset('/dist/entry/nav.js') }}"></script>
 @endsection

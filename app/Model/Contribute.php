@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Follow;
 use App\Model\UserCheck;
 use App\Model\Producer;
+use App\Model\Notify;
 
 /**
  * Class Contribute
@@ -63,8 +64,11 @@ class Contribute extends Model
             $user_follow_count = User::getUserFollowCount($user_id);
         }
         $producer_follower_count = Producer::getProducer($producer_id)['follower_count'];
+
+        $user_id_producer = Producer::getUseridByProducerid($producer_id);
+        Notify::addNotify($user_id, $producer_id, $user_id_producer, 'contributer');
 //        成为参与者后自动关注
-        Follow::addFollow($model['user_id'],$user_follow_count,$model['contribute_grade'],$model['producer_id'],$producer_follower_count);
+        Follow::addFollow($model['user_id'], $user_follow_count,$model['contribute_grade'], $model['producer_id'], $producer_follower_count, $time, 1);
 
         return $model;
     }
@@ -73,6 +77,10 @@ class Contribute extends Model
         $model = Contribute::where('producer_id', $producer_id)
             ->where('user_id', $user_id)
             ->update(['fund_per_month' => $fund_per_month, 'contribute_grade' => $contribute_grade]);
+
+        $user_id_producer = Producer::getUseridByProducerid($producer_id);
+        Notify::addNotify($user_id, $producer_id, $user_id_producer, 'change_plan');
+
         Follow::updateFollowInfo($user_id, $contribute_grade, $producer_id);
         return $model;
     }

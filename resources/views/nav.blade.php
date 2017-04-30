@@ -1,5 +1,6 @@
 <style>
     .header-nav{
+        z-index: 1000;
         width: 100%;
         height: 50px;
         background: rgba(44, 44, 65, 1);
@@ -112,6 +113,40 @@
     </div>
 </nav>
 <script>
+    let isWindowfocus = true;
+    //短轮询，间隔时间5秒
+    let checkoutTime = 5000;
+    //判断页面当时是否被聚焦，若无则没必要再向接口请求数据，继续轮询
+    $(window).on('blur',function(){
+        isWindowfocus = false;
+    });
+    $(window).on('focus',function(){
+        isWindowfocus = true;
+    });
+//    短轮询循环方法，在页面聚焦时每过一个checkoutTime，就向服务器的通知接口请求数据
+    function getNotify(){
+        console.log(isWindowfocus);
+        if(isWindowfocus){
+            $.get('/user/notify/get-check', function(data){
+                if(data.ec == 200){
+                    console.log(data);
+                }
+                setTimeout(function(data){
+                    getNotify();
+                }, checkoutTime);
+            })
+        }else{
+            setTimeout(function(data){
+                getNotify();
+            }, checkoutTime);
+        }
+    }
+//    页面载入后间隔1秒，短轮询开始
+    setTimeout(function(data){
+        getNotify();
+    },1000);
+
+
     $(function(){
         $('.header-nav .become-producer').on('click',function(){
             $.post('/apply/producer',function(data){
@@ -121,14 +156,14 @@
             })
         });
         var user_menu_go = null;
-//        $('.header-nav .user-block .user-site').on('mouseenter',function(){
-//            user_menu_go = null;
-//            $(this).find('.user-menu').removeClass('hide');
-//        }).on('mouseleave',function(){
-//            var _this = this;
-//            user_menu_go = setTimeout(function(){
-//                $(_this).find('.user-menu').addClass('hide');
-//            },300);
-//        })
+        $('.header-nav .user-block .user-site').on('mouseenter',function(){
+            user_menu_go = null;
+            $(this).find('.user-menu').removeClass('hide');
+        }).on('mouseleave',function(){
+            var _this = this;
+            user_menu_go = setTimeout(function(){
+                $(_this).find('.user-menu').addClass('hide');
+            },300);
+        })
     })
 </script>

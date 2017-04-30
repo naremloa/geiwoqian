@@ -7,6 +7,7 @@ use App\Model\UserCheck;
 use App\Model\Producer;
 use App\Model\User;
 use App\Jobs\Feed\BroadcastUpdate;
+use App\Model\Notify;
 
 /**
  * Class Follow
@@ -39,7 +40,7 @@ class Follow extends Model
      * @param string $time
      * @return array
      */
-    public static function addFollow($user_id = null, $user_follow_count = null, $contribute_grade, $producer_id, $producer_follower_count = null, $time = ''){
+    public static function addFollow($user_id = null, $user_follow_count = null, $contribute_grade, $producer_id, $producer_follower_count = null, $time = '', $is_contributer = 0){
         $model = new Follow();
         //没有传用户相关信息时，默认操作者为当前登陆用户
         if(!$user_id && !$user_follow_count){
@@ -63,6 +64,12 @@ class Follow extends Model
 
         Producer::updateProducerFollowerCount($producer_id, 1);
         User::updateUserFollowcount($user_id, 1);
+//        若已是参与者，不需要要发关注通知
+        if(!$is_contributer){
+            $user_id_producer = Producer::getUseridByProducerid($producer_id);
+            Notify::addNotify($user_id, $producer_id, $user_id_producer, 'follow');
+        }
+
 
         dispatch(new BroadcastUpdate($user_id, $producer_id, 1));
 

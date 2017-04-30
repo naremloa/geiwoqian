@@ -21,6 +21,8 @@ Route::post('/register/post','RegisterController@postregister');
 Route::group(['middleware' => 'login'], function(){
     Route::get('/identify/logout','Identify\LoginController@logout');
     Route::get('/home','HomeController@index');
+    Route::get('/home/notify', 'NotifyController@index');
+    Route::get('/user/notify/get-check', 'NotifyController@getCheck');
     Route::get('/user/timeline','HomeController@getTimeline');
     Route::get('/producer/{url_slug}','ProducerController@index');
     Route::get('/producer/get/timeline','ProducerController@getTimeline');
@@ -34,6 +36,7 @@ Route::group(['middleware' => 'login'], function(){
     Route::post('/post/follow','FollowController@postFollow');
     Route::post('/post/remove-follow','FollowController@postRemoveFollow');
     Route::get('/feed/{url_slug}','FeedController@index');
+    Route::post('/post/img/upload','TestController@upload');
 //    Route::get('/home', function(){
 //        return '登入成功';
 //    });

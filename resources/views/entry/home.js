@@ -6,6 +6,7 @@ const feed = new Vue({
     el: '.feed',
     data:function(){
         return{
+            user: BLADE.user,
             feeds: BLADE.feed,
             producer_all: BLADE.producer_all,
             loading: 0,
@@ -15,8 +16,8 @@ const feed = new Vue({
         }
     },
     components:{
-        'vm-test': vmTest,
-        'vm-feed-card': vmFeedCard,
+        vmTest,
+        vmFeedCard,
     },
     created:function(){
         let _this = this;
@@ -47,4 +48,16 @@ const feed = new Vue({
             getTimeline(this);
         })
     },
+    mounted:function(){
+        let _this = this;
+        $('#fileupload').fileupload({
+            url: '/post/img/upload',
+            progressall: function (e, data){
+                // let progress = parseInt(data.loaded / data.total * 100, 10);
+            },
+            done: function(e, data){
+                console.log(data);
+            }
+        })
+    }
 });

@@ -176,4 +176,10 @@ class Producer extends Model
             return 0;
         }
     }
+
+    public static function getUseridByProducerid($producer_id){
+        $model = Producer::where('id', $producer_id)
+            ->first()->toArray();
+        return $model['user_id'];
+    }
 }

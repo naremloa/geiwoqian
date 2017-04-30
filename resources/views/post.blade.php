@@ -15,7 +15,8 @@
             <p>标题：</p>
             <input class="cl-input" name="title" style="width: 100%;" autocomplete="off">
             <p>正文：</p>
-            <div class="text-div" contenteditable="true" name="content"></div>
+            <textarea id="editor" placeholder="Balabala"></textarea>
+            {{--<div class="text-div" contenteditable="true" name="content"></div>--}}
             <div class="submit-box mt-40" style="text-align: center;">
                 <a class="cl-btn submit-btn" onselectstart="return false">提交</a>
             </div>
@@ -23,6 +24,11 @@
     </article>
     <script>
         $(function(){
+            var editor = new Simditor({
+                textarea: $('#editor'),
+                //optional options
+                toolbarFloatOffset: 50,
+            });
             $('.post-box .post-start-btn').on('click',function(e){
                 $target = $(e.target);
                 if(!$target.hasClass('post-start-btn')){
