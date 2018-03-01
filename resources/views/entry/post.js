@@ -1,10 +1,14 @@
 import Vue from 'vue'
+import vmProducerPost from '../components/vm-producer-post.vue'
 
 new Vue({
-    el: '#box',
+    el: '.producer-post',
     data:function(){
         return{
 
         }
+    },
+    components:{
+        vmProducerPost,
     }
 });

@@ -9,6 +9,7 @@ use App\Model\Producer;
 use App\Libraries\Response;
 use App\Model\UserOperate;
 use App\Model\Follow;
+use App\Model\TagPost;
 
 
 class ProducerController extends Controller
@@ -24,6 +25,7 @@ class ProducerController extends Controller
         $is_follow = Follow::isFollow($user['id'], $producer['id']);
         $feed = Feed::getFeedByProducerid($producer['id']);
         $is_producer = Producer::isProducer($user['id'], $url_slug);
+        $tag_post = TagPost::getTagPost($producer['id']);
 
         $reward = Reward::getReward($producer['id']);
 
@@ -35,6 +37,7 @@ class ProducerController extends Controller
             'has_more' => count($feed) == $per_page? 1: 0,
             'is_producer' => $is_producer,
             'reward' => $reward,
+            'tag_post' => $tag_post,
         ];
         return view('producer',$data);
 //            return $data;

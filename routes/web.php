@@ -27,16 +27,22 @@ Route::group(['middleware' => 'login'], function(){
     Route::get('/producer/{url_slug}','ProducerController@index');
     Route::get('/producer/get/timeline','ProducerController@getTimeline');
     Route::get('/producer/{url_slug}/edit-reward', 'ProducerController@getEditReward');
-    Route::get('/producer/setting/edit','ProducerSettingController@index');
+    Route::get('/producer/setting/edit','ProducRerSettingController@index');
     Route::post('/post/producer/add-reward', 'ProducerSettingController@postAddReward');
     Route::post('/post/contribute/edit','ContributeController@postEditContribute');
     Route::post('/apply/producer','ProducerController@postApply');
     Route::get('/postpage','PostController@index');
-    Route::post('/post/submit/new','PostController@postNew');
+    Route::post('/post/postsubmit/new','PostController@postNew');
+    Route::post('/post/postsubmit/modify', 'PostController@postModify');
     Route::post('/post/follow','FollowController@postFollow');
     Route::post('/post/remove-follow','FollowController@postRemoveFollow');
     Route::get('/feed/{url_slug}','FeedController@index');
     Route::post('/post/img/upload','TestController@upload');
+    Route::post('/post/producer/add-post-new-tag', 'PostTagController@addNewTag');
+    Route::post('/post/draft/update', 'PostController@postUpdateDraft');
+    Route::get('/postpage/draft-list', 'PostController@getDraftList');
+    Route::get('/postpage/posted-list', 'PostController@getPostedList');
+    Route::get('/user/setting/edit', 'UserSettingController@index');
 //    Route::get('/home', function(){
 //        return '登入成功';
 //    });

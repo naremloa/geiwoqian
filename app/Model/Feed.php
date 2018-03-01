@@ -58,12 +58,18 @@ class Feed extends Model
      * @param $feed
      */
     public function broadcastFeed($feed){
-        $follower_ids = Follow::getFollowers($feed['producer_id']);
+        $follower_ids_all = Follow::getFollowers($feed['producer_id']);
+        $follower_ids = [];
+        foreach($follower_ids_all as $v){
+            if($v['contribute_grade'] >= $feed['limit_grade']){
+                $follower_ids[] = $v;
+            }
+        }
         $model = UserFeed::addUserFeed($feed, $follower_ids);
     }
 
     /**
-     * 队列中处理多条feed任务的目标函数，通常用于捐献和关注时更新相关producer的所有post到个人feed中
+     * 队列中处理多条feed任务的目标函数，通常用于支持和关注时更新相关producer的所有post到个人feed中
      *
      * @param $producer_id
      * @param $user_id

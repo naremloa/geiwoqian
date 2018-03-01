@@ -23,7 +23,7 @@ class RegisterController extends Controller
         if($identify == self::IDENTIFY_KEY){
             $model = User::findByAccount($account);
             if($model){
-                return Response::formatJson(404,'账号已存在');
+                return Response::formatJson(404,'账号名被占用');
             }else{
                 $model = new User();
             }

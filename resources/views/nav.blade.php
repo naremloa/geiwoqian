@@ -3,7 +3,7 @@
         z-index: 1000;
         width: 100%;
         height: 50px;
-        background: rgba(44, 44, 65, 1);
+        background: rgba(33, 34, 77, 0.9);
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
         position: fixed;
         top: 0;
@@ -60,7 +60,7 @@
         position: absolute;
         width: 120px;
         left: -35px;
-        background: rgba(44, 44, 65, 1);
+        background: rgba(52, 53, 92, 1);
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
         padding: 5px 20px;
         box-sizing: border-box;
@@ -82,7 +82,7 @@
     </div>
     <div class="web-only">
         <div class="nav-wrapper relative">
-            <a class="logo ml-40" href="/home"><span class="ft-color-white fs32">GeiWoQian</span><span class="ft-color-white ml-10">later</span></a>
+            <a class="logo ml-40" href="/home"><span class="ft-color-white fs32"><span style="color: rgb(236, 116, 116);">Gei</span><span style="color: rgb(104, 141, 210);">Wo</span><span style="color: rgb(163, 207, 6);">Qian</span></span><span class="ft-color-white ml-10">later</span></a>
             <a class="logout ml-40 ft-color-white pointer" href="/identify/logout">注销</a>
             <div class="user-block clearfix">
                 @if($user['role'] != 3)
@@ -101,10 +101,10 @@
                     <span class="user-avatar-box">
                           <img class="wh100 circle" src="/img/default_avatar.png">
                     </span>
-                    <div class="user-menu">
+                    <div class="user-menu hide">
                         <ul>
                             <li><a>home页</a></li>
-                            <li><a>设置</a></li>
+                            <li><a href="/user/setting/edit" target="_blank">设置</a></li>
                         </ul>
                     </div>
                 </div>

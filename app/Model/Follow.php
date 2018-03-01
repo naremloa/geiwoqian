@@ -97,8 +97,7 @@ class Follow extends Model
     public static function getFollowers($producer_id){
         $model = Follow::where('producer_id',$producer_id)
             ->select(['user_id'])
-            ->get()
-            ->toArray();
+            ->get();
         return $model;
     }
 

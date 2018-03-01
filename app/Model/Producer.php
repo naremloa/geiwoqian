@@ -152,10 +152,17 @@ class Producer extends Model
         return $model->toArray();
     }
 
+    public static function updateProducerTagPostCount($producer_id, $operate_num){
+        $model = Producer::where('id',$producer_id)->first();
+        $model->tag_post_count = $model->tag_post_count + $operate_num;
+        $model->save();
+        return $model->toArray();
+    }
+
     public static function getProducerInfoByFeed($feed){
-        foreach($feed as $k){
-            $k = DateFormat::addTimeShow($k);
-            $k['producer_info'] = Producer::getProducer($k['producer_id']);
+        foreach($feed as $v){
+            $v = DateFormat::addTimeShow($v);
+            $v['producer_info'] = Producer::getProducer($v['producer_id']);
 
         }
         return $feed;

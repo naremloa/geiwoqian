@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libraries\Response;
 use Illuminate\Http\Request;
 use zgldh\QiniuStorage\QiniuStorage;
 
@@ -23,7 +24,7 @@ class TestController extends Controller
         }else{
             return 'no';
         }
-        return $result;
+        return Response::formatJson(200, '上传成功', $result);
     }
 
     public static function getBinary($request, $name = 'file'){

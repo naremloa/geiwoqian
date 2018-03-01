@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="{{ asset('/js/alertifyjs/css/alertify.min.css') }}">
         <link rel="stylesheet" href="{{ asset('/js/alertifyjs/css/themes/default.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('js/simditor-2.3.6/styles/simditor.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('js/simditor-2.3.6/styles/local_simditor.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         @yield('link')
         <script src="{{ asset('/js/jquery-3.1.1.min.js') }}"></script>
         <script src="{{ asset('/js/vue.js') }}"></script>

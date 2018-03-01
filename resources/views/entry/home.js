@@ -2,7 +2,7 @@ import Vue from 'vue'
 import vmTest from '../components/vm-test.vue'
 import vmFeedCard from '../components/vm-feed-card.vue'
 
-const feed = new Vue({
+var feed = new Vue({
     el: '.feed',
     data:function(){
         return{

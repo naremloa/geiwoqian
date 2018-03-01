@@ -14,6 +14,7 @@
             user: {!! json_encode($user) !!},
             producer: {!! json_encode($producer) !!},
             reward: {!! json_encode($reward) !!},
+            tag_post: {!! json_encode($tag_post) !!},
         }
     </script>
     <script src="{{ asset('/dist/entry/producer_setting.js') }}"></script>

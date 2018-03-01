@@ -19,6 +19,7 @@
             reward: {!! json_encode($reward) !!},
             is_follow: '{{$is_follow}}',
             is_producer: '{{$is_producer}}',
+            tag_post: {!! json_encode($tag_post) !!}
         }
     </script>
     <script src="{{ asset('/dist/entry/producer.js') }}"></script>

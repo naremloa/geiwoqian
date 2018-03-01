@@ -1,0 +1,27 @@
+.simditor{
+    border: 0;
+}
+.simditor .simditor-wrapper{
+    background: rgba(248, 248, 248, 1);
+}
+.simditor .simditor-body{
+    padding: 22px 0 40px;
+}
+.simditor .simditor-wrapper .simditor-placeholder{
+    padding: 22px 0;
+}
+.simditor .simditor-toolbar{
+    border: 0;
+    background: rgba(248, 248, 248, 1);
+}
+.simditor .simditor-wrapper.toolbar-floating .simditor-toolbar{
+    box-shadow: none;
+}
+.simditor .simditor-toolbar > ul > li > .toolbar-item{
+    width: 40px;
+}
+.simditor .simditor-body img,
+.editor-sylte img{
+    width: 100%;
+    height: 100%;
+}

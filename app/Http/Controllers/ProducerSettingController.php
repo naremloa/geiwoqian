@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\UserCheck;
 use App\Model\Producer;
 use App\Model\Reward;
+use App\Model\TagPost;
 
 class ProducerSettingController extends Controller
 {
@@ -18,10 +19,12 @@ class ProducerSettingController extends Controller
         }
         $producer = Producer::getProducerByUserid($user['id']);
         $reward = Reward::getReward($producer['id']);
+        $tag_post = TagPost::getTagPost($producer['id']);
         $data = [
             'user' => $user,
             'producer' => $producer,
             'reward' => $reward,
+            'tag_post' => $tag_post,
         ];
         return view('producer_setting',$data);
 //        return $data;

@@ -66,7 +66,6 @@ class UserFeed extends Model
 
     public static function getUserFeed($user_id, $cur_page = 1, $per_page = 5){
         $model = UserFeed::where('user_id', $user_id)
-            ->where('limit_grade', '>', 0)
             ->select(['feed_id'])
             ->get()
             ->toArray();

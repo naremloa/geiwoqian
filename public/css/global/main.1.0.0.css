@@ -6,8 +6,8 @@ html,body{
     font-size: 14px;
 }
 body{
-    background: rgba(39, 40, 56, 1);
-    color: white;
+    background: rgba(232, 232, 232, 1);
+    color: #5a5a68;
 }
 a{
     text-decoration: none;
@@ -15,6 +15,7 @@ a{
 }
 input{
     outline: 0;
+    border: 0;
 }
 p,div{
     margin: 0;
@@ -70,6 +71,9 @@ ul{
 .fs32{
     font-size: 32px;
 }
+.fwb{
+    font-weight: bold;
+}
 .relative{
     position: relative;
 }
@@ -121,12 +125,13 @@ ul{
     color: white;
 }
 .cl-card{
-    background: #2c2c41;
+    background: rgba(248, 248, 248, 1);
+    border: 1px solid rgba(220, 220, 220, 1);
     padding: 20px;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .2);
+    /*box-shadow: -1px 0 0 0 rgba(0, 0, 0, .2);*/
     box-sizing: border-box;
-    margin-bottom: 20px;
-    color: white;
+    margin-bottom: 10px;
+    color: #5a5a68;
 }
 .cl-radio{
     border: 2px solid rgba(255, 255, 255, .5);
@@ -137,6 +142,22 @@ ul{
 .on .cl-radio{
     border: 2px solid rgba(255, 66, 95, 1);
     background: rgba(255, 66, 95, 1);
+}
+.cl-tag{
+    padding: 0 5px;
+    line-height: 22px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.cl-tag:hover{
+    border: 1px solid #777;
+}
+.on.cl-tag{
+    border: 1px solid rgb(236, 116, 116);
+    background: rgb(236, 116, 116);
+    color: white;
 }
 .text-div{
     border: 1px solid rgba(0, 0, 0, .5);
