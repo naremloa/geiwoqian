@@ -38,7 +38,7 @@
         color: white;
     }
     .vm-producer-detail .producer-body .producer-intro{
-        lien-height: 1.7;
+        line-height: 1.7;
     }
     .vm-producer-detail .producer-body .cl-card .is_producer_setting{
         display: none;
