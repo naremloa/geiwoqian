@@ -43,7 +43,7 @@
             </div>
         </div>
     </section>
-</template>
+</templa>
 <script>
     export default{
         data(){

@@ -38,7 +38,7 @@
         color: white;
     }
     .vm-producer-detail .producer-body .producer-intro{
-        lien-height: 1.7;
+        line-height: 1.7;
     }
     .vm-producer-detail .producer-body .cl-card .is_producer_setting{
         display: none;
@@ -74,20 +74,13 @@
                         <template v-if="is_follow == 1">
                             <div class="cl-btn follow-btn" onselectstart="return false" @click="method_follow_remove">取关</div>
                         </template>
-                        <template v-else="is_follow == 0">
+                        <template v-else-if="is_follow == 0">
                             <div class="cl-btn follow-btn" onselectstart="return false" @click="method_follow">关注</div>
                         </template>
                         <a class="cl-btn contribute-btn ml-20" onselectstart="return false" :href="'/producer/'+producer_info.url_slug+'/edit-reward'">成为支持者</a>
                     </div>
                 </div>
                 <div class="flex-item-1"></div>
-                <!--<template v-if="is_follow == 1">-->
-                    <!--<div class="cl-btn follow-btn" onselectstart="return false" @click="method_follow_remove">取关</div>-->
-                <!--</template>-->
-                <!--<template v-else="is_follow == 0">-->
-                    <!--<div class="cl-btn follow-btn" onselectstart="return false" @click="method_follow">关注</div>-->
-                <!--</template>-->
-                <!--<a class="cl-btn contribute-btn ml-20" onselectstart="return false" :href="'/producer/'+producer_info.url_slug+'/edit-reward'">成为支持者</a>-->
             </div>
         </div>
         <div class="producer-body cl-wrap flex-box pt-40">
@@ -118,7 +111,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <vm-feed-card v-for="data in feeds" :data="data" :key="data.id"></vm-feed-card>
+                    <vm-feed-card v-for="data in feeds" :data="data" v-bind="data.id"></vm-feed-card>
                 </div>
             </div>
             <div class="cl-wrap-right">
