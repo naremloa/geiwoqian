@@ -27,7 +27,7 @@
 @endsection
 @section('content')
     <div class="title">
-        这里是好欢迎页面
+        这里是不欢迎页面
     </div>
     <div class="login-box">
         <div>
