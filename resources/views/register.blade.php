@@ -1,6 +1,6 @@
 @extends('main')
 @section('title')
-    注册页
+    註冊頁
 @endsection
 @section('link')
 @endsection
@@ -24,31 +24,31 @@
 @endsection
 @section('content')
     <div class="title">
-        这里是注册页
+        這裡是註冊頁
     </div>
     <div class="register-box">
         <div>
-            <label for="account">邮箱：</label>
+            <label for="account">郵箱：</label>
             <input id="account">
         </div>
         <div>
-            <label for="name">昵称：</label>
+            <label for="name">暱稱：</label>
             <input id="name">
         </div>
         <div>
-            <label for="password">密码：</label>
+            <label for="password">密碼：</label>
             <input id="password" type="password">
         </div>
         <div>
-            <label for="identify">验证口令：</label>
+            <label for="identify">驗證口令</label>
             <input id="identify" type="identify">
         </div>
-        <div class="register-btn btn" style="margin-top: 20px;">注册</div>
+        <div class="register-btn btn" style="margin-top: 20px;">ע��</div>
     </div>
-    <a href="/">跳到登入页</a>
+    <a href="/">跳到登入頁</a>
     <script>
         $('.register-btn').on('click',function(){
-            var account = $('#account').val();
+               var account = $('#account').val();
             var password = $('#password').val();
             var name = $('#name').val();
             var identify = $('#identify').val();

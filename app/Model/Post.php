@@ -55,7 +55,7 @@ class Post extends Model
         return $model;
     }
 
-    public static function $$getPostByFeed($post_ids, $offset_page = 0, $per_page = 5){
+    public static function getPostByFeed($post_ids, $offset_page = 0, $per_page = 5){
         $post = Post::whereIn('id', $post_ids)
             ->skip($offset_page)
             ->limit($per_page)

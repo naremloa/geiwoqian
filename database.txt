@@ -1,0 +1,156 @@
+CREATE TABLE user(
+	id INT(10) UNSIGNED AUTO_INCREMENT,
+	password CHAR(64) NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	status TINYINT(3) UNSIGNED,
+	role TINYINT(3) UNSIGNED,
+	avatar VARCHAR(256),
+	follow_count INT(11),
+	create_time INT(11),
+	update_time INT(11),
+	register_time INT(11),
+	active_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE producer(
+	id INT(10) UNSIGNED AUTO_INCREMENT,
+	user_id INT(10) UNSIGNED NOT NULL,
+	url_slug VARCHAR(100) NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	intro TEXT,
+	avatar VARCHAR(256),
+	cover VARCHAR(256),
+	status TINYINT(3) UNSIGNED,
+	balance INT(10) UNSIGNED,
+	get_fund_per_month INT(11),
+	backer_count INT(11),
+	follower_count INT(11),
+	reward_count INT(11),
+	tag_post_count INT(11),
+	create_time INT(11),
+	update_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE reward(
+	producer_id INT(10) UNSIGNED,
+	reward_fund INT(10) UNSIGNED,
+	reward_title VARCHAR(100) NOT NULL,
+	reward_description MEDIUMTEXT,
+	create_time INT(11),
+	update_time INT(11)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE follow(
+	user_id INT(10) UNSIGNED,
+	contribute_grade INT(11),
+	producer_id INT(10) UNSIGNED,
+	create_time INT(11)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE contribute(
+	user_id INT(10) UNSIGNED,
+	fund_per_month INT(11),
+	contribute_grade INT(11),
+	producer_id INT(10) UNSIGNED,
+	create_time INT(11),
+	update_time INT(11)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE feed(
+	id INT(10) UNSIGNED,
+	producer_id INT(10) UNSIGNED,
+	post_id INT(10) UNSIGNED,
+	type TINYINT(3) UNSIGNED,
+	limit_grade INT(11),
+	status TINYINT(3) UNSIGNED,
+	create_time INT(11),
+	udpate_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE user_feed(
+	id INT(10) UNSIGNED,
+	producer_id INT(10) UNSIGNED,
+	user_id INT(10) UNSIGNED,
+	feed_Id INT(10) UNSIGNED,
+	limit_grade INT(11),
+	create_time INT(11),
+	update_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE post(
+	id INT(10) UNSIGNED,
+	producer_id INT(10) UNSIGNED,
+	title VARCHAR(100),
+	content MEDIUMTEXT,
+	public_content TEXT,
+	status TINYINT(3) UNSIGNED,
+	type TINYINT(3) UNSIGNED,
+	limit_grade INT(11),
+	draft_id INT(10) UNSIGNED,
+	create_time INT(11),
+	publish_time INT(11),
+	update_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE post_draft(
+	id INT(10) UNSIGNED,
+	producer_id INT(10) UNSIGNED,
+	title VARCHAR(100),
+	content MEDIUMTEXT,
+	publich_content TEXT,
+	status TINYINT(3) UNSIGNED,
+	type TINYINT(3) UNSIGNED,
+	limit_grade INT(11),
+	post_id INT(10) UNSIGNED,
+	create_time INT(11),
+	publish_time INT(11),
+	update_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE notify(
+	id INT(10) UNSIGNED,
+	user_id INT(10) UNSIGNED,
+	producer_id INT(10) UNSIGNED,
+	to_user_id INT(10) UNSIGNED,
+	action VARCHAR(100),
+	status TINYINT(3) UNSIGNED,
+	create_time INT(11),
+	update_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE tag_post(
+	id INT(10) UNSIGNED,
+	name VARCHAR(100),
+	producer_id INT(10) UNSIGNED,
+	rela_post_count INT(11),
+	create_time INT(11),
+	update_time INT(11),
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE tag_post_rela(
+	tag_post_id INT(10) UNSIGNED,
+	post_id INT(10) UNSIGNED,
+	producer_id INT(10) UNSIGNED,
+	post_status INT(11),
+	create_time TINYINT(3) UNSIGNED
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
